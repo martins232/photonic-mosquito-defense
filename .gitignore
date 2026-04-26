@@ -10,6 +10,9 @@ __pycache__/
 venv/
 .env
 
+#datasets
+dataset/
+
 # IDE files
 .vscode/
 
@@ -28,4 +31,6 @@ dist/
 
 # Pytest cache
 .pytest_cache/
+
+
 
