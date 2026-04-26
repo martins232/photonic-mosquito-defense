@@ -1,0 +1,31 @@
+# Byte-compiled Python files
+*.pyc
+*.pyo
+__pycache__/
+
+# Log files
+*.log
+
+# Virtual environment files
+venv/
+.env
+
+# IDE files
+.vscode/
+
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Build files
+build/
+dist/
+*.egg-info/
+.eggs/
+
+
+
+# Pytest cache
+.pytest_cache/
+
