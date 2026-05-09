@@ -16,7 +16,6 @@ dataset/
 # IDE files
 .vscode/
 
-
 # OS generated files
 .DS_Store
 Thumbs.db
@@ -27,10 +26,14 @@ dist/
 *.egg-info/
 .eggs/
 
-
-
 # Pytest cache
 .pytest_cache/
 
+# Large data and model weights
+data/
+models/
+*.pt
 
-
+# Output files and training logs
+outputs/
+runs/

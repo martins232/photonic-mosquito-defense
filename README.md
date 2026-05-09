@@ -1,7 +1,6 @@
 # 🦟 Photonic Mosquito Defense System
 
-> An AI-powered mosquito species detection and targeting system 
-> built for real-world vector control applications.
+> An AI-powered, real-time mosquito species detection and targeting system built for real-world vector control applications.
 
 ## Motivation
 
@@ -11,66 +10,60 @@ disease costs a person — and motivated me to explore whether precision
 engineering could offer a fundamentally different approach to mosquito 
 control: one that is targeted, chemical-free, and intelligent.
 
-*Anopheles gambiae* — the primary malaria vector in sub-Saharan Africa 
-— is one of the seven species this system is trained to identify.
+This system is capable of identifying and tracking 7 classes, including *Anopheles gambiae* — the primary malaria vector in sub-Saharan Africa.
 
-## What This System Does
+## 🚀 Features & Capabilities
 
-- Detects and classifies 6 mosquito species + non-mosquito objects in real time
-- Tracks individual mosquitoes across video frames with persistent IDs
-- Predicts trajectory and overlays a simulated targeting reticle
-- Logs all detection events with timestamps and confidence scores
+The system is currently in **Phase 1**, featuring a fully functional software prototype that performs the following in real-time:
 
-## Species Detected
+- **Real-Time Species Classification:** Detects 6 mosquito species + non-mosquito objects using a custom-trained YOLOv8 model.
+- **Multi-Object Tracking:** Assigns persistent IDs to mosquitoes as they move across video frames, locking onto a stabilized classification using temporal smoothing.
+- **Trajectory Prediction:** Calculates flight velocity and predicts future intercept locations based on coordinate history.
+- **Targeting HUD & Logging:** Overlays a simulated targeting reticle on active targets and logs all detection events, confidences, and intercept coordinates to a CSV file.
+- **Auto-Capture:** Automatically saves high-resolution screenshots the moment a target species classification is locked.
+
+### Species Detected
 
 | Species | Medical Relevance |
 |---|---|
-| Anopheles gambiae | Primary malaria vector (sub-Saharan Africa) |
-| Anopheles funestus | Major malaria vector |
-| Anopheles other | Secondary malaria vectors |
-| Aedes | Dengue, Zika, Yellow Fever |
-| Culex | Lymphatic filariasis |
-| Mansonia | Filariasis, some encephalitis |
-| Non-mosquito | Negative class |
+| **Anopheles gambiae** | Primary malaria vector (sub-Saharan Africa) |
+| **Anopheles funestus** | Major malaria vector |
+| **Anopheles other** | Secondary malaria vectors |
+| **Aedes** | Dengue, Zika, Yellow Fever |
+| **Culex** | Lymphatic filariasis, West Nile |
+| **Mansonia** | Filariasis, encephalitis |
+| **Non-mosquito** | Negative class (flies, background noise) |
 
-## System Architecture
-Video Input → YOLOv8 Detector → Species Classifier
-↓
-Multi-Object Tracker (ByteTrack)
-↓
-Trajectory Predictor (Kalman Filter)
-↓
-Simulated Targeting Reticle + Event Logger
+## 🧠 System Architecture
 
-## Current Status
+The current detection pipeline runs synchronously:
+1. **Video Input** → Stream captured via OpenCV.
+2. **YOLOv8 Detector** → Identifies bounding boxes and initial classifications.
+3. **Tracker & Smoother** → YOLO tracking + history-based stabilization for consistent ID and species locks.
+4. **Trajectory Predictor** → Calculates vector intercept coordinates from the recent flight trail.
+5. **HUD & Logger** → Renders the visual targeting reticle and exports structured event data.
 
-- [x] Dataset acquired and validated (2,719 training instances, 7 classes)
-- [x] YOLOv8n model trained on mosquito species dataset
-- [ ] Real-time detection pipeline
-- [ ] Multi-object tracking with persistent IDs
-- [ ] Trajectory prediction and targeting overlay
-- [ ] Wing-beat frequency classifier (audio)
-- [ ] ROS 2 simulation bridge
+## 🛠️ Tech Stack
 
-## Tech Stack
+- **Core:** Python 3.x
+- **Computer Vision:** YOLOv8 (Ultralytics), OpenCV
+- **Data Math:** NumPy, SciPy
+- **(Planned):** FilterPy (Kalman filtering), ROS 2
 
-- Python 3.x
-- YOLOv8 (Ultralytics)
-- OpenCV
-- NumPy / SciPy
-- FilterPy (Kalman filtering)
+## 📊 Dataset & Model Details
 
-## Dataset
+- **Dataset:** Species-labeled mosquito dataset from Roboflow Universe (License: CC BY 4.0).
+- **Size:** 2,719 Training, 473 Validation, 806 Test instances.
+- **Model:** YOLOv8n (Nano) trained for rapid real-time inference.
+- **Performance:** Evaluated test set performance with high mAP accuracy across most classes.
 
-Species-labeled mosquito dataset from Roboflow Universe  
-License: CC BY 4.0  
-Classes: 7 | Train: 2,719 | Val: 473 | Test: 806
+## 🗺️ Roadmap
 
-## Roadmap
+- [x] **Phase 1:** Software prototype — real-time detection, tracking, and simulated targeting.
+- [ ] **Phase 2 (3–6 months):** ROS 2 simulation bridge, embedded system design.
+- [ ] **Phase 3 (Future):** Hardware integration, deployment on Raspberry Pi / Jetson Nano, and physical optical targeting mechanics.
+- [ ] **Additional:** Wing-beat frequency classifier (audio integration).
 
-**Phase 1 (Now):** Software prototype — detection, tracking, simulated targeting  
-**Phase 2 (3–6 months):** ROS 2 simulation, embedded system design  
-**Phase 3 (Future):** Raspberry Pi / Jetson Nano deployment, hardware integration  
+## 👤 Author
 
-## Author
-Madueke Martins
+**Madueke Martins**
