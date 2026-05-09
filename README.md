@@ -1,5 +1,7 @@
 # 🦟 Photonic Mosquito Defense System
 
+![Visual Demonstration](outputs/defence.gif)
+
 > An AI-powered, real-time mosquito species detection and targeting system built for real-world vector control applications.
 
 ## Motivation
